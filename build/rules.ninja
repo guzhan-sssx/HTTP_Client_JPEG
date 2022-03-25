@@ -6,7 +6,7 @@
 # It is included in the main 'build.ninja'.
 
 # =============================================================================
-# Project: HTTP_JPEF_2
+# Project: HTTP_Client_JPEF
 # Configuration: 
 # =============================================================================
 # =============================================================================
@@ -14,7 +14,7 @@
 #############################################
 # Rule for compiling C files.
 
-rule C_COMPILER__HTTP_JPEF_2.2eelf
+rule C_COMPILER__HTTP_Client_JPEF.2eelf
   depfile = $DEP_FILE
   deps = gcc
   command = ccache D:\esp-idf\.espressif\tools\xtensa-esp32-elf\esp-2021r1-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out   -c $in
@@ -24,7 +24,7 @@ rule C_COMPILER__HTTP_JPEF_2.2eelf
 #############################################
 # Rule for linking CXX executable.
 
-rule CXX_EXECUTABLE_LINKER__HTTP_JPEF_2.2eelf
+rule CXX_EXECUTABLE_LINKER__HTTP_Client_JPEF.2eelf
   command = cmd.exe /C "$PRE_LINK && D:\esp-idf\.espressif\tools\xtensa-esp32-elf\esp-2021r1-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-g++.exe  $FLAGS  $LINK_FLAGS @$RSP_FILE  -o $TARGET_FILE  && $POST_BUILD"
   description = Linking CXX executable $TARGET_FILE
   rspfile = $RSP_FILE
@@ -1541,7 +1541,7 @@ rule C_STATIC_LIBRARY_LINKER____idf_main
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = D:\esp-idf\.espressif\tools\cmake\3.16.4\bin\cmake.exe -SD:\ESP32Demo1\HTTP_JPEF_2 -BD:\ESP32Demo1\HTTP_JPEF_2\build
+  command = D:\esp-idf\.espressif\tools\cmake\3.16.4\bin\cmake.exe -SD:\ESP32Demo1\HTTP_Client_JPEF -BD:\ESP32Demo1\HTTP_Client_JPEF\build
   description = Re-running CMake...
   generator = 1
 

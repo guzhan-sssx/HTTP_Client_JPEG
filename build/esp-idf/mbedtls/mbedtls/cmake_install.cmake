@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/HTTP_JPEF_2")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/HTTP_Client_JPEF")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,8 +34,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/ESP32Demo1/HTTP_JPEF_2/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
-  include("D:/ESP32Demo1/HTTP_JPEF_2/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
+  include("D:/ESP32Demo1/HTTP_Client_JPEF/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
+  include("D:/ESP32Demo1/HTTP_Client_JPEF/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
 
 endif()
 

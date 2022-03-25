@@ -1,8 +1,8 @@
 {
     "project_name":       "bootloader",
     "project_path":       "D:/esp-idf/esp/esp-idf-v4.3.1/esp-idf-v4.3.1/components/bootloader/subproject",
-    "build_dir":          "D:/ESP32Demo1/HTTP_JPEF_2/build/bootloader",
-    "config_file":        "D:/ESP32Demo1/HTTP_JPEF_2/sdkconfig",
+    "build_dir":          "D:/ESP32Demo1/HTTP_Client_JPEF/build/bootloader",
+    "config_file":        "D:/ESP32Demo1/HTTP_Client_JPEF/sdkconfig",
     "config_defaults":    "",
     "app_elf":            "bootloader.elf",
     "app_bin":            "bootloader.bin",
