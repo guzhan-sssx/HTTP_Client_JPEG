@@ -1,0 +1,7 @@
+source "D:/esp-idf/esp/esp-idf-v4.3.1/esp-idf-v4.3.1/components/efuse/Kconfig"
+source "D:/esp-idf/esp/esp-idf-v4.3.1/esp-idf-v4.3.1/components/esp32/Kconfig"
+source "D:/esp-idf/esp/esp-idf-v4.3.1/esp-idf-v4.3.1/components/esp_common/Kconfig"
+source "D:/esp-idf/esp/esp-idf-v4.3.1/esp-idf-v4.3.1/components/esp_system/Kconfig"
+source "D:/esp-idf/esp/esp-idf-v4.3.1/esp-idf-v4.3.1/components/log/Kconfig"
+source "D:/esp-idf/esp/esp-idf-v4.3.1/esp-idf-v4.3.1/components/newlib/Kconfig"
+source "D:/esp-idf/esp/esp-idf-v4.3.1/esp-idf-v4.3.1/components/spi_flash/Kconfig"
