@@ -10,8 +10,11 @@
 
 #include "http_client.h"
 #include "esp_camera.h"
+#include "driver/gpio.h"
 
 #define TAG "http_client"
+
+#define LED_G_IO    4
 
 //巴法云上传图片需要的HTTP请求头
 // const char*  post_url = "http://images.bemfa.com/upload/v1/upimages.php"; // 默认上传地址
@@ -23,7 +26,7 @@ const char*  urlPath = "";           //如果不为空，会生成自定义图�
 
 
 //函数声明
-void on_wifi_callback(wifi_event_type_t event);
+// void on_wifi_callback(wifi_event_type_t event);
 void http_client_task(void* params);
 int do_start_http_client();
 esp_err_t on_http_event(esp_http_client_event_t *evt);
@@ -42,7 +45,7 @@ void on_wifi_callback(wifi_event_type_t event)
 {
     if(event == EVENT_GOT_IP)
     {
-    	do_start_http_client();
+    	// do_start_http_client();
     }
 
     if(event == EVENT_DISCONNECT)
@@ -52,7 +55,8 @@ void on_wifi_callback(wifi_event_type_t event)
 }
 
 //初始化http_client
-int do_start_http_client(){
+int do_start_http_client()
+{
 
 	//分配空间，初始化等 配置http客户端参数，分配需要的资源
 	esp_http_client_handle_t client = esp_http_client_init(&config_with_auth);
@@ -101,14 +105,24 @@ esp_err_t on_http_event(esp_http_client_event_t *evt){
 
 
 //post 拍照上传函数
-void http_client_task(void* params){
-
+void http_client_task(void* params)
+{
 	camera_fb_t * fb = NULL;
-
-
+ 	size_t fb_len = 0;
+    int64_t fr_start = esp_timer_get_time();
 
     fb = esp_camera_fb_get();
-	// esp_camera_fb_return(fb);
+	vTaskDelay(100/portTICK_RATE_MS);
+	esp_camera_fb_return(fb);
+	vTaskDelay(100/portTICK_RATE_MS);
+
+	gpio_set_level(LED_G_IO,1);
+    fb = esp_camera_fb_get();
+
+	vTaskDelay(500/portTICK_RATE_MS);
+	gpio_set_level(LED_G_IO,0);
+
+	
 	if (!fb) {
         ESP_LOGE(TAG, "Camera capture failed");  
     }
@@ -123,8 +137,11 @@ void http_client_task(void* params){
 	// 设置表单数据
 	//通过post方式请求的数据，传入发送数据的缓存地址与长度，必须在esp_http_client_perform之前调用
 	// esp_http_client_set_post_field(client, post_data, strlen(post_data));
+	fb_len = fb->len;
+
   	esp_http_client_set_post_field(client, (const char *)fb->buf, fb->len);//设置http发送的内容和长度
 	
+
 	esp_http_client_set_header(client, "Content-Type", "image/jpg"); //设置http头部字段
 	esp_http_client_set_header(client, "Authorization", uid);        //设置http头部字段
 	esp_http_client_set_header(client, "Authtopic", topic);          //设置http头部字段
@@ -145,5 +162,10 @@ void http_client_task(void* params){
 	esp_http_client_cleanup(client);
 
 	esp_camera_fb_return(fb);
+
+	int64_t fr_end = esp_timer_get_time();
+    //图片大小和时间
+    ESP_LOGI(TAG, "JPG: %uKB %ums", (uint32_t)(fb_len/1024), (uint32_t)((fr_end - fr_start)/1000));
+
 	vTaskDelete(NULL);
 }

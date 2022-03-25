@@ -1,5 +1,5 @@
-#ifndef _HTTP_CLIENT_H
-#define _HTTP_CLIENT_H
+#ifndef _GU_CAMERA_H
+#define _GU_CAMERA_H
 
 
 
